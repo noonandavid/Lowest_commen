@@ -1,13 +1,3 @@
-/*************************************************************************
- *  Binary Search Tree class.
- *  Adapted from Sedgewick and Wayne.
- *
- *  @version 3.0 1/11/15 16:49:42
- *
- *  @author TODO
- *
- *************************************************************************/
-
 import java.util.NoSuchElementException;
 
 
@@ -19,22 +9,22 @@ public class BST_LCA<Key extends Comparable<Key>, Value> {
      */
     private class Node {
         private Key key;           // sorted by key
-        private Value val;         // associated data
+        private int val;         // associated data
         private Node left, right;  // left and right subtrees
         private int N;             // number of nodes in subtree
 
-        public Node(Key key, Value val, int N) {
+        public Node(Key key, int val, int N) {
             this.key = key;
             this.val = val;
             this.N = N;
         }
     }
 
-    public void put(Key key, Value val) {
+    public void put(Key key, int val) {
         root = put(root, key, val);
     }
 
-    private Node put(Node x, Key key, Value val) {
+    private Node put(Node x, Key key, int val) {
         if (x == null) return new Node(key, val, 1);
         int cmp = key.compareTo(x.key);
         if      (cmp < 0) x.left  = put(x.left,  key, val);
@@ -43,24 +33,23 @@ public class BST_LCA<Key extends Comparable<Key>, Value> {
         return x;
     }
 
-    
-   public Node lowestCommonAncestor(Node root, Node p, Node q) {
-        if(root==null)
-            return null;
-     
-        if(root==p || root==q)
-            return root;
-     
-        Node l = lowestCommonAncestor(root.left, p, q);
-        Node r = lowestCommonAncestor(root.right, p, q);
-     
-        if(l!=null&&r!=null){
-            return root;
-        }else if(l==null&&r==null){
-            return null;
-        }else{
-            return l==null?r:l;
-        }
+    public int lowestCommonAncestor(int p,int q)
+    {
+		return lowestCommonAncestor(root,p,q).val;
     }
+  
+ public Node lowestCommonAncestor(Node root, int p, int q) {
+    Node m = root;
+ 
+    if(m.val > p && m.val < q){
+        return m;  
+    }else if(m.val>p && m.val > q){
+        return lowestCommonAncestor(root.left, p, q);
+    }else if(m.val<p && m.val < q){
+        return lowestCommonAncestor(root.right, p, q);
+    }
+ 
+    return root;
+}
 
 }
