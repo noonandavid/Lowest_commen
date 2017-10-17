@@ -1,5 +1,3 @@
-import java.util.NoSuchElementException;
-
 
 public class BST_LCA<Key extends Comparable<Key>, Value> {
     private Node root;             // root of BST
@@ -10,27 +8,28 @@ public class BST_LCA<Key extends Comparable<Key>, Value> {
      * Private node class.
      */
     private class Node {
-        private Key key;           // sorted by key
         private int val;         // associated data
         private Node left, right;  // left and right subtrees
-        private int N;             // number of nodes in subtree
 
-        public Node(Key key, int val, int N) {
-            this.key = key;
+        public Node(int val) {
             this.val = val;
-            this.N = N;
         }
     }
 
-    public void put(Key key, int val) {
-        root = put(root, key, val);
+    public void put(int val) {
+        root = put(root,val);
     }
 
-    private Node put(Node x, Key key, int val) {
-        if (x == null) return new Node(key, val, 1);
-        int cmp = key.compareTo(x.key);
-        if      (cmp < 0) x.left  = put(x.left,  key, val);
-        else if (cmp > 0) x.right = put(x.right, key, val);
+    private Node put(Node x,int val) {
+        int compare = 0;
+    	if (x == null) return new Node(val);
+        if (x.val > val)
+        	 compare = -1;
+        else if (x.val > val)
+        	compare = 1;
+    	
+        if      (compare < 0) x.left  = put(x.left,val);
+        else if (compare > 0) x.right = put(x.right,val);
         else              x.val   = val;
         list [count] = val;
         count++;
@@ -52,7 +51,7 @@ public class BST_LCA<Key extends Comparable<Key>, Value> {
     	else return -1;
     }
   
- public Node lowestCommonAncestor(Node root, int p, int q) {
+  private Node lowestCommonAncestor(Node root, int p, int q) {
     Node m = root;
  
     if(m.val > p && m.val < q){
@@ -67,3 +66,4 @@ public class BST_LCA<Key extends Comparable<Key>, Value> {
 }
 
 }
+
