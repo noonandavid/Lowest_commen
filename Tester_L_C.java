@@ -8,7 +8,7 @@ public class Tester_L_C {
 	public void test() {
 		 BST_LCA<Integer, Integer> bst = new BST_LCA<Integer, Integer>();
 		 
-		 
+		 assertEquals(-1, bst.lowestCommonAncestor(1,7));
 		 bst.put(10, 10);      
 	     bst.put(5, 5);       
 	     bst.put(15, 15);

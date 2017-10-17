@@ -4,6 +4,8 @@ import java.util.NoSuchElementException;
 public class BST_LCA<Key extends Comparable<Key>, Value> {
     private Node root;             // root of BST
     private int count = 0;
+    int [] list;
+    
     /**
      * Private node class.
      */
@@ -30,12 +32,24 @@ public class BST_LCA<Key extends Comparable<Key>, Value> {
         if      (cmp < 0) x.left  = put(x.left,  key, val);
         else if (cmp > 0) x.right = put(x.right, key, val);
         else              x.val   = val;
+        list [count] = val;
+        count++;
         return x;
     }
 
     public int lowestCommonAncestor(int p,int q)
     {
-		return lowestCommonAncestor(root,p,q).val;
+    	boolean p_ck = false;
+    	boolean q_ck = false;
+    	for(int i = 0; i < count; i++){
+    		if (p == list[i] )
+    			p_ck = true;
+    	if (p == list[i] )
+			q_ck = true;
+    	}	
+    	if (p_ck == true && q_ck == true)
+		{return lowestCommonAncestor(root,p,q).val;}
+    	else return -1;
     }
   
  public Node lowestCommonAncestor(Node root, int p, int q) {
