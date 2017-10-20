@@ -8,7 +8,7 @@ public class Tester_L_C {
 	public void test() {
 		 BST_LCA<Integer, Integer> bst = new BST_LCA<Integer, Integer>();
 		 
-		 assertEquals(-1, bst.lowestCommonAncestor(1,7));
+		 assertEquals("Checking an empty tree",-1, bst.lowestCommonAncestor(1,7));
 		 bst.put(10);      
 	     bst.put(5);       
 	     bst.put(15);
@@ -17,12 +17,12 @@ public class Tester_L_C {
 	     bst.put(3);     
 	     bst.put(1);      
 		 
-	     
-		 assertEquals(5, bst.lowestCommonAncestor(1,7));
+	     assertEquals("Testing where one node is present and the other is not",-1, bst.lowestCommonAncestor(45,7));
+		 assertEquals("Twesting where both nodes are present",5, bst.lowestCommonAncestor(1,7));
 		 
-		 assertEquals(10, bst.lowestCommonAncestor(5,15));
+		 assertEquals("Testing where both nodes are present and the lca is the root",10, bst.lowestCommonAncestor(5,15));
 	      
-		 assertEquals(5, bst.lowestCommonAncestor(5,5));
+		 assertEquals("Where both are the same",5, bst.lowestCommonAncestor(5,5));
 	    
 	    
 	     bst.put(6);       
@@ -37,7 +37,7 @@ public class Tester_L_C {
 	     bst.put(20);       
 	     bst.put(14);     
 	    
-	     assertEquals(15, bst.lowestCommonAncestor(14,20));
+	     assertEquals("Checking a deeper tree",15, bst.lowestCommonAncestor(14,20));
 	}
 
 }

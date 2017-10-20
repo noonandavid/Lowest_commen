@@ -1,8 +1,8 @@
+import java.util.ArrayList;
 
 public class BST_LCA<Key extends Comparable<Key>, Value> {
     private Node root;             // root of BST
-    private int count = 0;
-    int [] list;
+    ArrayList<Integer> list = new ArrayList<Integer>();
     
     /**
      * Private node class.
@@ -25,14 +25,13 @@ public class BST_LCA<Key extends Comparable<Key>, Value> {
     	if (x == null) return new Node(val);
         if (x.val > val)
         	 compare = -1;
-        else if (x.val > val)
+        else if (x.val < val)
         	compare = 1;
     	
         if      (compare < 0) x.left  = put(x.left,val);
         else if (compare > 0) x.right = put(x.right,val);
         else              x.val   = val;
-        list [count] = val;
-        count++;
+        list.add(val);
         return x;
     }
 
@@ -40,12 +39,11 @@ public class BST_LCA<Key extends Comparable<Key>, Value> {
     {
     	boolean p_ck = false;
     	boolean q_ck = false;
-    	for(int i = 0; i < count; i++){
-    		if (p == list[i] )
+    	if (list.contains(p))
     			p_ck = true;
-    	if (p == list[i] )
-			q_ck = true;
-    	}	
+    	if (list.contains(q))
+				q_ck = true;
+    		
     	if (p_ck == true && q_ck == true)
 		{return lowestCommonAncestor(root,p,q).val;}
     	else return -1;
