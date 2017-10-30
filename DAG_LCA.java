@@ -24,19 +24,24 @@ public class DAG_LCA<Key extends Comparable<Key>, Value> {
 		Node a = new Node (x);
 		a.parents.add(x);
 		tree.put(a.val, a);}
+		System.out.print("jj");
 	}
 	
-	public void addParent(int a, int b){
+	public boolean addParent(int a, int b){
 		Node x = tree.get(a);
 		if (b == 0){
 				x.rank = 1;
+				return true;
 			}
 		else{
 			Node y = tree.get(b);
-			smartCombine(x.parents, y.parents);
-			 if (y.rank  > x.rank)
-
-			{ x.rank = y.rank + 1;}
+			if (y.parents.contains(a)){
+				return false;}else{
+				smartCombine(x.parents, y.parents);
+				if (y.rank  > x.rank)
+				{ x.rank = y.rank + 1;}
+				return true;
+			}
 		}
 	}
 	public static void smartCombine(ArrayList<Integer> first, ArrayList<Integer> second) {
