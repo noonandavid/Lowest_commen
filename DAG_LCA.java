@@ -24,7 +24,6 @@ public class DAG_LCA<Key extends Comparable<Key>, Value> {
 		Node a = new Node (x);
 		a.parents.add(x);
 		tree.put(a.val, a);}
-		System.out.print("jj");
 	}
 	
 	public boolean addParent(int a, int b){
@@ -36,7 +35,9 @@ public class DAG_LCA<Key extends Comparable<Key>, Value> {
 		else{
 			Node y = tree.get(b);
 			if (y.parents.contains(a)){
-				return false;}else{
+				System.out.println(a + " is an invalid input as it creates a cycle.");
+				return false;
+				}else{
 				smartCombine(x.parents, y.parents);
 				if (y.rank  > x.rank)
 				{ x.rank = y.rank + 1;}
@@ -57,10 +58,16 @@ public class DAG_LCA<Key extends Comparable<Key>, Value> {
 		Node y;
 		if (tree.containsKey(a)){
 		x = tree.get(a);}
-		else return -1;
+		else {
+			System.out.println(a + " is not present in the graph.");
+			return -1;
+		}
 		if (tree.containsKey(b)){
 		y = tree.get(b);}
-		else return -1;
+		else {
+			System.out.println(b + " is not present in the graph.");
+			return -1;
+		}
 		int rankx = 0;
 		int lca = 0;
 		ArrayList<Integer> duplicatevalues = new ArrayList<Integer>();
